@@ -32,4 +32,5 @@ jobs:
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4.3.6
       with:
-        path: /target/cmsrpg-0.0.1-SNAPSHOT.jar
+        name: CMSRPG
+        path: CMSRPG/target/cmsrpg-0.0.1-SNAPSHOT.jar
