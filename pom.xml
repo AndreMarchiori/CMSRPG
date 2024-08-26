@@ -4,4 +4,27 @@
   <artifactId>cmsrpg</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>CMSRPG</name>
+  
+  <properties>
+    <maven.compiler.target>17</maven.compiler.target>
+    <maven.compiler.source>17</maven.compiler.source>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+</properties>
+<build>
+    <defaultGoal>clean package</defaultGoal>
+    <plugins>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>3.4.2</version>
+            <configuration>
+                <archive>
+                    <manifest>
+                        <mainClass>com.github.andremarchiori.CSMRPG</mainClass>
+                    </manifest>
+                </archive>
+            </configuration>
+        </plugin>
+      </plugins>
+</build>
 </project>
