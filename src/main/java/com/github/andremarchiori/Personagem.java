@@ -2,7 +2,7 @@ package com.github.andremarchiori;
 
 public class Personagem {
 	private int id;
-
+	private int exLogic = 1;
 	private int level = 1;
 	private long experience = 0;
 	private String name;
@@ -16,6 +16,15 @@ public class Personagem {
 	}
 
 	public Personagem() {
+	}
+	
+
+	public int getExLogic() {
+		return exLogic;
+	}
+
+	public void setExLogic(int exLogic) {
+		this.exLogic = exLogic;
 	}
 
 	public int getLevel() {

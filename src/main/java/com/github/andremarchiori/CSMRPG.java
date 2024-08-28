@@ -17,6 +17,7 @@ import java.util.Scanner;
 public class CSMRPG {
 
 	private static Map<Integer, Personagem> personagens;
+
 	public static void main(String[] args) {
 		personagens = new HashMap<>();
 
@@ -66,12 +67,52 @@ public class CSMRPG {
 				System.out.println("Finalizado");
 				loop = false;
 				break;
+			case 5:
+				espacamentoPadrao();
+				System.out.println(";----------------------------------------------------------------;");
+				System.out.println("Deletas");
+//				callRemoves(scanner);
+				System.out.println(";----------------------------------------------------------------;");
+				break;
 			default:
 				throw new IllegalArgumentException("A opcao inserida não existe");
 			}
 			espacamentoPadrao();
 		} while (loop == true);
 	}
+
+//	public static void callRemoves(Scanner scanner) {
+//		int idPersonagem;
+//		ArrayList<Personagem> listaDePersonagens = new ArrayList<>();
+//
+//		while (true) {
+//			System.out.printf("%nInsira o ID do personagem: ");
+//			idPersonagem = Integer.parseInt(scanner.next());
+//			if (idPersonagem == -1) {
+//				return;
+//			} else if (!personagens.containsKey(idPersonagem)) {
+//				System.err.println("Id não encontrado. Insira -1 para encerrar ou tente novamente.");
+//			} else {
+//				break;
+//			}
+//		}
+//
+//		carregarPersonagens();
+//		personagens.get(idPersonagem).setExLogic(0);
+//		if (listaDePersonagens.isEmpty()) {
+//
+//			try {
+//				for (int i = 0; i < proximoId() - 1; i++) {
+//					listaDePersonagens.add(personagens.get(i + 1));
+//				}
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		clearTheFile();
+//		salvarPersonagem(listaDePersonagens);
+//		System.out.println("BaNiDo");
+//	}
 
 	public static void callAdd(Scanner scanner) {
 		int idPersonagem;
@@ -91,20 +132,20 @@ public class CSMRPG {
 
 		carregarPersonagens();
 		System.out.printf("%nInsira o valor de experiência a ser adicionado: ");
-		
+
 		personagens.get(idPersonagem).addExperience(scanner.nextLong());
 		if (listaDePersonagens.isEmpty()) {
-			
+
 			try {
-				for(int i = 0; i < proximoId()-1; i++) {
-					listaDePersonagens.add(personagens.get(i+1));
+				for (int i = 0; i < proximoId() - 1; i++) {
+					listaDePersonagens.add(personagens.get(i + 1));
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
 		clearTheFile();
-		salvarPersonagem(listaDePersonagens);// erro
+		salvarPersonagem(listaDePersonagens);
 		System.out.println("Adição Completa");
 
 	}
@@ -215,6 +256,7 @@ public class CSMRPG {
 		try {
 			BufferedWriter bufferedWriter = openWriterPersonagens();
 			for (int j = 0; j < listaDePersonagens.size(); j++) {
+				bufferedWriter = openWriterPersonagens();
 				bufferedWriter.write(listaDePersonagens.get(j).toString());
 				bufferedWriter.newLine();
 				bufferedWriter.close();
@@ -229,9 +271,13 @@ public class CSMRPG {
 		try {
 			BufferedReader bufferedReader = openReaderPersonagens();
 			String linhas = bufferedReader.readLine();
-			System.out.printf("%n  %-5s%-35s%-10s%-12s%n", "ID", "NOME", "LEVEL", "EXPERIENCIA");
+			System.out.printf("  %-5s%-35s%-10s%-12s%n", "ID", "NOME", "LEVEL", "EXPERIENCIA");
 			while (linhas != null) {
 				String[] colunas = linhas.split(";");
+//				if (Integer.parseInt(colunas[4]) == 0) {
+//					linhas = bufferedReader.readLine();
+//					continue;
+//				}
 				System.out.println(
 						String.format("  %-5s%-35s%-10s%-12s", colunas[0], colunas[1], colunas[2], colunas[3]));
 				linhas = bufferedReader.readLine();
