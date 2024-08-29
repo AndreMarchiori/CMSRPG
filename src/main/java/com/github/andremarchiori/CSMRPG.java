@@ -3,11 +3,7 @@ package com.github.andremarchiori;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,58 +22,101 @@ public class CSMRPG {
 
 			Menus.chamarMenuPrincipal();
 
-			switch (scanner.nextInt()) {
+			loop = extractedMainMenu(loop, scanner);
+			espacamentoPadrao();
+		} while (loop == true);
+	}
+
+	private static Boolean extractedMainMenu(Boolean loop, Scanner scanner) {
+		switch (scanner.nextInt()) {
+		case 1:
+			espacamentoPadrao();
+			File file = new File("characters.txt");
+			System.out.println(" Cadastro de Personagem");
+			System.out.println(";----------------------------------------------------------------;");
+			if (file.exists()) {
+				try {
+					cadastrarPersonagem();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			} else {
+				try {
+					file.createNewFile();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			System.out.println(";----------------------------------------------------------------;");
+			break;
+		case 2:
+			espacamentoPadrao();
+			System.out.println(" Listagem de Personagens");
+			System.out.println(";----------------------------------------------------------------;");
+			listarPersonagens();
+			System.out.println(";----------------------------------------------------------------;");
+			break;
+		case 3:
+			extractedAltMenu(scanner);
+			
+			break;
+		case 4:
+			espacamentoPadrao();
+			System.out.println("Finalizado");
+			loop = false;
+			break;
+		default:
+			throw new IllegalArgumentException("A opcao inserida não existe");
+		}
+		return loop;
+	}
+
+	private static void extractedAltMenu(Scanner scanner) {
+		while(true) {
+			espacamentoPadrao();
+			Menus.chamarMenuAlteracao();
+			switch(scanner.nextInt()) {
 			case 1:
 				espacamentoPadrao();
-				File file = new File("characters.txt");
-				System.out.println(" Cadastro de Personagem");
+				System.out.println(" Adição de XP");
 				System.out.println(";----------------------------------------------------------------;");
-				if (file.exists()) {
-					try {
-						cadastrarPersonagem();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				} else {
-					try {
-						file.createNewFile();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
+				carregarPersonagens();
+				callAdd(scanner);
+				System.out.println(";----------------------------------------------------------------;");
 				break;
 			case 2:
 				espacamentoPadrao();
-				System.out.println(" Listagem de Personagens");
+				System.out.println(" Redução de XP");
 				System.out.println(";----------------------------------------------------------------;");
-				listarPersonagens();
+				carregarPersonagens();
+				callSub(scanner);
 				System.out.println(";----------------------------------------------------------------;");
 				break;
 			case 3:
-				espacamentoPadrao();
 				carregarPersonagens();
-				System.out.println(" Adição de XP");
+				espacamentoPadrao();
+				System.out.println(" Remoção de personagem");
 				System.out.println(";----------------------------------------------------------------;");
-				callAdd(scanner);
+				callRemoves(scanner);
 				System.out.println(";----------------------------------------------------------------;");
 				break;
 			case 4:
 				carregarPersonagens();
 				espacamentoPadrao();
+				System.out.println(" Recuperação de Personagem");
 				System.out.println(";----------------------------------------------------------------;");
-				System.out.println("Deletas");
-				callRemoves(scanner);
+				callRecuperacao(scanner);
 				System.out.println(";----------------------------------------------------------------;");
+				break;
 			case 5:
 				espacamentoPadrao();
-				System.out.println("Finalizado");
-				loop = false;
-				break;
+				System.out.println("Retornando");
+				return;
 			default:
-				throw new IllegalArgumentException("A opcao inserida não existe");
-			}
-			espacamentoPadrao();
-		} while (loop == true);
+				System.out.println("Opção Invalida");
+				break;
+			}			
+		}
 	}
 
 	public static void callRemoves(Scanner scanner) {
@@ -107,18 +146,18 @@ public class CSMRPG {
 				e.printStackTrace();
 			}
 		}
-		clearTheFile();
+		IOTxt.clearTheFile();
 		salvarPersonagem(listaDePersonagens);
 		System.out.println("BaNiDo");
 	}
-
-	public static void callAdd(Scanner scanner) {
+	
+	public static void callRecuperacao(Scanner scanner) {
 		int idPersonagem;
 		ArrayList<Personagem> listaDePersonagens = new ArrayList<>();
 
 		while (true) {
 			System.out.printf("%nInsira o ID do personagem: ");
-			idPersonagem = scanner.nextInt();
+			idPersonagem = Integer.parseInt(scanner.next());
 			if (idPersonagem == -1) {
 				return;
 			} else if (!personagens.containsKey(idPersonagem)) {
@@ -128,7 +167,43 @@ public class CSMRPG {
 			}
 		}
 
+		personagens.get(idPersonagem).setExLogic(1);
+		if (listaDePersonagens.isEmpty()) {
+
+			try {
+				for (int i = 0; i < proximoId() - 1; i++) {
+					listaDePersonagens.add(personagens.get(i + 1));
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		IOTxt.clearTheFile();
+		salvarPersonagem(listaDePersonagens);
+		System.out.println("Personagem restaurado");
+	}
+
+	public static void callAdd(Scanner scanner) {
+		int idPersonagem;
+		ArrayList<Personagem> listaDePersonagens = new ArrayList<>();
+		
+		
+		while (true) {
+			System.out.printf("%nInsira o ID do personagem: ");
+			idPersonagem = scanner.nextInt();
+			if (idPersonagem == -1) {
+				return;
+			} else if (!personagens.containsKey(idPersonagem)) {
+				System.err.println("Id Inválido. Insira -1 para encerrar ou tente novamente.");
+			} else {
+				break;
+			}
+		}
 		carregarPersonagens();
+		if(personagens.get(idPersonagem).getExLogic() == 0) {
+			System.err.println("Id Inválido.");
+			return;
+		}
 		System.out.printf("%nInsira o valor de experiência a ser adicionado: ");
 
 		personagens.get(idPersonagem).addExperience(scanner.nextLong());
@@ -142,10 +217,48 @@ public class CSMRPG {
 				e.printStackTrace();
 			}
 		}
-		clearTheFile();
+		IOTxt.clearTheFile();
 		salvarPersonagem(listaDePersonagens);
 		System.out.println("Adição Completa");
+	}
+	
+	public static void callSub(Scanner scanner) {
+		int idPersonagem;
+		ArrayList<Personagem> listaDePersonagens = new ArrayList<>();
+		
+		
+		while (true) {
+			System.out.printf("%nInsira o ID do personagem: ");
+			idPersonagem = scanner.nextInt();
+			if (idPersonagem == -1) {
+				return;
+			} else if (!personagens.containsKey(idPersonagem)) {
+				System.err.println("Id Inválido. Insira -1 para encerrar ou tente novamente.");
+			} else {
+				break;
+			}
+		}
+		carregarPersonagens();
+		if(personagens.get(idPersonagem).getExLogic() == 0) {
+			System.err.println("Id Inválido.");
+			return;
+		}
+		System.out.printf("%nInsira o valor de experiência a ser reduzido(valores positivo apenas): ");
 
+		personagens.get(idPersonagem).subExperience(scanner.nextLong());
+		if (listaDePersonagens.isEmpty()) {
+
+			try {
+				for (int i = 0; i < proximoId() - 1; i++) {
+					listaDePersonagens.add(personagens.get(i + 1));
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		IOTxt.clearTheFile();
+		salvarPersonagem(listaDePersonagens);
+		System.out.println("Subtração Completa");
 	}
 
 	public static void espacamentoPadrao() {
@@ -170,7 +283,7 @@ public class CSMRPG {
 
 	private static void carregarPersonagens() {
 		try {
-			BufferedReader bufferedReader = openReaderPersonagens();
+			BufferedReader bufferedReader = IOTxt.openReaderPersonagens();
 			String linha = bufferedReader.readLine();
 			while (linha != null) {
 				Personagem personagem = parsePersonagem(linha);
@@ -196,7 +309,7 @@ public class CSMRPG {
 	public static int proximoId() throws IOException {
 		int maiorId = 0;
 
-		BufferedReader bufferedReader = openReaderPersonagens();
+		BufferedReader bufferedReader = IOTxt.openReaderPersonagens();
 		String linha = bufferedReader.readLine();
 		while (linha != null) {
 			String[] colunas = linha.split(";");
@@ -223,7 +336,7 @@ public class CSMRPG {
 
 	private static void salvarPersonagem(Personagem personagem) {
 		try {
-			BufferedWriter bufferedWriter = openWriterPersonagens();
+			BufferedWriter bufferedWriter = IOTxt.openWriterPersonagens();
 			bufferedWriter.write(personagem.toString());
 			bufferedWriter.newLine();
 			bufferedWriter.close();
@@ -234,9 +347,9 @@ public class CSMRPG {
 
 	private static void salvarPersonagem(ArrayList<Personagem> listaDePersonagens) {
 		try {
-			BufferedWriter bufferedWriter = openWriterPersonagens();
+			BufferedWriter bufferedWriter = IOTxt.openWriterPersonagens();
 			for (int j = 0; j < listaDePersonagens.size(); j++) {
-				bufferedWriter = openWriterPersonagens();
+				bufferedWriter = IOTxt.openWriterPersonagens();
 				bufferedWriter.write(listaDePersonagens.get(j).toString());
 				bufferedWriter.newLine();
 				bufferedWriter.close();
@@ -249,7 +362,7 @@ public class CSMRPG {
 
 	private static void listarPersonagens() {
 		try {
-			BufferedReader bufferedReader = openReaderPersonagens();
+			BufferedReader bufferedReader = IOTxt.openReaderPersonagens();
 			String linhas = bufferedReader.readLine();
 			System.out.printf("  %-5s%-35s%-10s%-12s%n", "ID", "NOME", "LEVEL", "EXPERIENCIA");
 			while (linhas != null) {
@@ -264,28 +377,6 @@ public class CSMRPG {
 			}
 
 			bufferedReader.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private static BufferedWriter openWriterPersonagens() throws IOException {
-		FileWriter escreveDados = new FileWriter("characters.txt", true);
-		return new BufferedWriter(escreveDados);
-	}
-
-	private static BufferedReader openReaderPersonagens() throws FileNotFoundException {
-		FileReader leitor = new FileReader("characters.txt");
-		return new BufferedReader(leitor);
-	}
-
-	private static void clearTheFile() {
-		try {
-			FileWriter fwOb = new FileWriter("characters.txt", false);
-			PrintWriter pwOb = new PrintWriter(fwOb, false);
-			pwOb.flush();
-			pwOb.close();
-			fwOb.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -11,7 +11,7 @@ public class Menus {
 		menu.add("Insira uma opcao:");
 		menu.add("1. Cadastro de Personagem");
 		menu.add("2. Listagem de Personagens");
-		menu.add("3. Adicionar XP");
+		menu.add("3. Alteração ");
 		menu.add("4. Finalizar");
 		menu.add(";----------------------------------------------------------------;");
 
@@ -21,5 +21,27 @@ public class Menus {
 		menu.clear();
 
 		System.out.print("> ");
+	}
+	
+	public static void chamarMenuAlteracao() {
+		List<String> menu = new ArrayList<>();
+		menu.add("Menu de Alterações");
+		menu.add(";----------------------------------------------------------------;");
+		menu.add("Insira uma opcao:");
+		menu.add("1. Adicionar XP");
+		menu.add("2. Reduzir XP");
+		menu.add("3. Remover Personagem");
+		menu.add("4. Recuperar Personagem");
+		menu.add("5. Retornar");
+		menu.add(";----------------------------------------------------------------;");
+
+		for (String cadaLinha : menu) {
+			System.out.println(cadaLinha);
+		}
+		menu.clear();
+
+		System.out.print("> ");
+		
+		
 	}
 }
