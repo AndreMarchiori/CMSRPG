@@ -187,6 +187,6 @@ public class Personagem {
 	
 	@Override
 	public String toString() {
-		return String.format("%d;%s;%d;%d", this.id, this.name, this.level, this.experience);
+		return String.format("%d;%s;%d;%d;%d", this.id, this.name, this.level, this.experience, this.exLogic);
 	}
 }

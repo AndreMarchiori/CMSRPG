@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -25,7 +24,7 @@ public class CSMRPG {
 		Scanner scanner = new Scanner(System.in);
 		do {
 
-			chamarMenuPrincipal();
+			Menus.chamarMenuPrincipal();
 
 			switch (scanner.nextInt()) {
 			case 1:
@@ -63,16 +62,16 @@ public class CSMRPG {
 				System.out.println(";----------------------------------------------------------------;");
 				break;
 			case 4:
-				espacamentoPadrao();
-				System.out.println("Finalizado");
-				loop = false;
-				break;
-			case 5:
+				carregarPersonagens();
 				espacamentoPadrao();
 				System.out.println(";----------------------------------------------------------------;");
 				System.out.println("Deletas");
-//				callRemoves(scanner);
+				callRemoves(scanner);
 				System.out.println(";----------------------------------------------------------------;");
+			case 5:
+				espacamentoPadrao();
+				System.out.println("Finalizado");
+				loop = false;
 				break;
 			default:
 				throw new IllegalArgumentException("A opcao inserida não existe");
@@ -81,38 +80,37 @@ public class CSMRPG {
 		} while (loop == true);
 	}
 
-//	public static void callRemoves(Scanner scanner) {
-//		int idPersonagem;
-//		ArrayList<Personagem> listaDePersonagens = new ArrayList<>();
-//
-//		while (true) {
-//			System.out.printf("%nInsira o ID do personagem: ");
-//			idPersonagem = Integer.parseInt(scanner.next());
-//			if (idPersonagem == -1) {
-//				return;
-//			} else if (!personagens.containsKey(idPersonagem)) {
-//				System.err.println("Id não encontrado. Insira -1 para encerrar ou tente novamente.");
-//			} else {
-//				break;
-//			}
-//		}
-//
-//		carregarPersonagens();
-//		personagens.get(idPersonagem).setExLogic(0);
-//		if (listaDePersonagens.isEmpty()) {
-//
-//			try {
-//				for (int i = 0; i < proximoId() - 1; i++) {
-//					listaDePersonagens.add(personagens.get(i + 1));
-//				}
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//		clearTheFile();
-//		salvarPersonagem(listaDePersonagens);
-//		System.out.println("BaNiDo");
-//	}
+	public static void callRemoves(Scanner scanner) {
+		int idPersonagem;
+		ArrayList<Personagem> listaDePersonagens = new ArrayList<>();
+
+		while (true) {
+			System.out.printf("%nInsira o ID do personagem: ");
+			idPersonagem = Integer.parseInt(scanner.next());
+			if (idPersonagem == -1) {
+				return;
+			} else if (!personagens.containsKey(idPersonagem)) {
+				System.err.println("Id não encontrado. Insira -1 para encerrar ou tente novamente.");
+			} else {
+				break;
+			}
+		}
+
+		personagens.get(idPersonagem).setExLogic(0);
+		if (listaDePersonagens.isEmpty()) {
+
+			try {
+				for (int i = 0; i < proximoId() - 1; i++) {
+					listaDePersonagens.add(personagens.get(i + 1));
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		clearTheFile();
+		salvarPersonagem(listaDePersonagens);
+		System.out.println("BaNiDo");
+	}
 
 	public static void callAdd(Scanner scanner) {
 		int idPersonagem;
@@ -148,25 +146,6 @@ public class CSMRPG {
 		salvarPersonagem(listaDePersonagens);
 		System.out.println("Adição Completa");
 
-	}
-
-	public static void chamarMenuPrincipal() {
-		List<String> menu = new ArrayList<>();
-		menu.add("Sistema de Armazenamento de Personas");
-		menu.add(";----------------------------------------------------------------;");
-		menu.add("Insira uma opcao:");
-		menu.add("1. Cadastro de Personagem");
-		menu.add("2. Listagem de Personagens");
-		menu.add("3. Adicionar XP");
-		menu.add("4. Finalizar");
-		menu.add(";----------------------------------------------------------------;");
-
-		for (String cadaLinha : menu) {
-			System.out.println(cadaLinha);
-		}
-		menu.clear();
-
-		System.out.print("> ");
 	}
 
 	public static void espacamentoPadrao() {
@@ -210,6 +189,7 @@ public class CSMRPG {
 		personagem.setName(colunas[1]);
 		personagem.setLevel(Integer.parseInt(colunas[2]));
 		personagem.setExperience(Long.parseLong(colunas[3]));
+		personagem.setExLogic(Integer.parseInt(colunas[4]));
 		return personagem;
 	}
 
@@ -274,10 +254,10 @@ public class CSMRPG {
 			System.out.printf("  %-5s%-35s%-10s%-12s%n", "ID", "NOME", "LEVEL", "EXPERIENCIA");
 			while (linhas != null) {
 				String[] colunas = linhas.split(";");
-//				if (Integer.parseInt(colunas[4]) == 0) {
-//					linhas = bufferedReader.readLine();
-//					continue;
-//				}
+				if (Integer.parseInt(colunas[4]) == 0) {
+					linhas = bufferedReader.readLine();
+					continue;
+				}
 				System.out.println(
 						String.format("  %-5s%-35s%-10s%-12s", colunas[0], colunas[1], colunas[2], colunas[3]));
 				linhas = bufferedReader.readLine();
