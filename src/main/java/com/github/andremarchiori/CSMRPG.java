@@ -29,46 +29,48 @@ public class CSMRPG {
 	}
 
 	private static Boolean extractedMainMenu(Boolean loop, Scanner scanner) {
-		switch (scanner.nextInt()) {
-		case 1:
-			espacamentoPadrao();
-			File file = new File("characters.txt");
-			System.out.println(" Cadastro de Personagem");
-			System.out.println(";----------------------------------------------------------------;");
-			if (file.exists()) {
-				try {
-					cadastrarPersonagem();
-				} catch (IOException e) {
-					e.printStackTrace();
+			switch (scanner.nextInt()) {
+			case 1:
+				espacamentoPadrao();
+				File file = new File("characters.txt");
+				System.out.println(" Cadastro de Personagem");
+				System.out.println(";----------------------------------------------------------------;");
+				if (file.exists()) {
+					try {
+						cadastrarPersonagem();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				} else {
+					try {
+						file.createNewFile();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
-			} else {
-				try {
-					file.createNewFile();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				System.out.println(";----------------------------------------------------------------;");
+				break;
+			case 2:
+				espacamentoPadrao();
+				System.out.println(" Listagem de Personagens");
+				System.out.println(";----------------------------------------------------------------;");
+				listarPersonagens();
+				System.out.println(";----------------------------------------------------------------;");
+				break;
+			case 3:
+				extractedAltMenu(scanner);
+				break;
+			case 4:
+				IOTxt.clearTheFile();
+				break;
+			case 5:
+				espacamentoPadrao();
+				System.out.println("Finalizado");
+				loop = false;
+				break;
+			default:
+				throw new IllegalArgumentException("A opcao inserida não existe");
 			}
-			System.out.println(";----------------------------------------------------------------;");
-			break;
-		case 2:
-			espacamentoPadrao();
-			System.out.println(" Listagem de Personagens");
-			System.out.println(";----------------------------------------------------------------;");
-			listarPersonagens();
-			System.out.println(";----------------------------------------------------------------;");
-			break;
-		case 3:
-			extractedAltMenu(scanner);
-			
-			break;
-		case 5:
-			espacamentoPadrao();
-			System.out.println("Finalizado");
-			loop = false;
-			break;
-		default:
-			throw new IllegalArgumentException("A opcao inserida não existe");
-		}
 		return loop;
 	}
 

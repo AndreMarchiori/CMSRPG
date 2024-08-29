@@ -12,7 +12,7 @@ public class Menus {
 		menu.add("1. Cadastro de Personagem");
 		menu.add("2. Listagem de Personagens");
 		menu.add("3. Alteração ");
-		menu.add("");
+		menu.add("4. \"Excluir\" Arquivo");
 		menu.add("5. Finalizar");
 		menu.add(";----------------------------------------------------------------;");
 
