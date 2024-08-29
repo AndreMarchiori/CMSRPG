@@ -14,6 +14,7 @@ public class CSMRPG {
 	private static Map<Integer, Personagem> personagens;
 
 	public static void main(String[] args) {
+		
 		personagens = new HashMap<>();
 
 		Boolean loop = true;
@@ -60,7 +61,7 @@ public class CSMRPG {
 			extractedAltMenu(scanner);
 			
 			break;
-		case 4:
+		case 5:
 			espacamentoPadrao();
 			System.out.println("Finalizado");
 			loop = false;
@@ -124,11 +125,17 @@ public class CSMRPG {
 		ArrayList<Personagem> listaDePersonagens = new ArrayList<>();
 
 		while (true) {
+			System.out.printf("%n-1 = retorna");
+			System.out.printf("%n 0 = listagem");
 			System.out.printf("%nInsira o ID do personagem: ");
 			idPersonagem = Integer.parseInt(scanner.next());
 			if (idPersonagem == -1) {
 				return;
-			} else if (!personagens.containsKey(idPersonagem)) {
+			}else if(idPersonagem == 0) {
+				espacamentoPadrao();
+				listarPersonagens();
+				espacamentoPadrao();
+			}else if (!personagens.containsKey(idPersonagem)) {
 				System.err.println("Id não encontrado. Insira -1 para encerrar ou tente novamente.");
 			} else {
 				break;
@@ -156,10 +163,16 @@ public class CSMRPG {
 		ArrayList<Personagem> listaDePersonagens = new ArrayList<>();
 
 		while (true) {
+			System.out.printf("%n-1 = retorna");
+			System.out.printf("%n 0 = listagem");
 			System.out.printf("%nInsira o ID do personagem: ");
 			idPersonagem = Integer.parseInt(scanner.next());
 			if (idPersonagem == -1) {
 				return;
+			} else if (idPersonagem == 0) {
+				espacamentoPadrao();
+				listarDesativados();
+				espacamentoPadrao();
 			} else if (!personagens.containsKey(idPersonagem)) {
 				System.err.println("Id não encontrado. Insira -1 para encerrar ou tente novamente.");
 			} else {
@@ -189,10 +202,16 @@ public class CSMRPG {
 		
 		
 		while (true) {
+			System.out.printf("%n-1 = retorna");
+			System.out.printf("%n 0 = listagem");
 			System.out.printf("%nInsira o ID do personagem: ");
 			idPersonagem = scanner.nextInt();
 			if (idPersonagem == -1) {
 				return;
+			} else if(idPersonagem == 0) {
+				espacamentoPadrao();
+				listarPersonagens();
+				espacamentoPadrao();
 			} else if (!personagens.containsKey(idPersonagem)) {
 				System.err.println("Id Inválido. Insira -1 para encerrar ou tente novamente.");
 			} else {
@@ -228,10 +247,16 @@ public class CSMRPG {
 		
 		
 		while (true) {
+			System.out.printf("%n-1 = retorna");
+			System.out.printf("%n 0 = listagem");
 			System.out.printf("%nInsira o ID do personagem: ");
 			idPersonagem = scanner.nextInt();
 			if (idPersonagem == -1) {
 				return;
+			}else if(idPersonagem == 0) {
+				espacamentoPadrao();
+				listarPersonagens();
+				espacamentoPadrao();
 			} else if (!personagens.containsKey(idPersonagem)) {
 				System.err.println("Id Inválido. Insira -1 para encerrar ou tente novamente.");
 			} else {
@@ -368,6 +393,28 @@ public class CSMRPG {
 			while (linhas != null) {
 				String[] colunas = linhas.split(";");
 				if (Integer.parseInt(colunas[4]) == 0) {
+					linhas = bufferedReader.readLine();
+					continue;
+				}
+				System.out.println(
+						String.format("  %-5s%-35s%-10s%-12s", colunas[0], colunas[1], colunas[2], colunas[3]));
+				linhas = bufferedReader.readLine();
+			}
+
+			bufferedReader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private static void listarDesativados() {
+		try {
+			BufferedReader bufferedReader = IOTxt.openReaderPersonagens();
+			String linhas = bufferedReader.readLine();
+			System.out.printf("  %-5s%-35s%-10s%-12s%n", "ID", "NOME", "LEVEL", "EXPERIENCIA");
+			while (linhas != null) {
+				String[] colunas = linhas.split(";");
+				if (Integer.parseInt(colunas[4]) == 1) {
 					linhas = bufferedReader.readLine();
 					continue;
 				}
