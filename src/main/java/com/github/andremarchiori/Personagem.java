@@ -17,7 +17,6 @@ public class Personagem {
 
 	public Personagem() {
 	}
-	
 
 	public int getExLogic() {
 		return exLogic;
@@ -48,7 +47,7 @@ public class Personagem {
 		this.experience += experience;
 		refreshLevel(this.level, this.experience);
 	}
-	
+
 	public void subExperience(long experience) {
 		this.experience -= experience;
 		refreshLevel(this.level, this.experience);
@@ -189,7 +188,7 @@ public class Personagem {
 	private void levelUp() {
 		this.level += 1;
 	}
-	
+
 	@Override
 	public String toString() {
 		return String.format("%d;%s;%d;%d;%d", this.id, this.name, this.level, this.experience, this.exLogic);
