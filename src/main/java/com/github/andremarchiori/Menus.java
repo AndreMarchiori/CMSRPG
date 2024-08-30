@@ -10,12 +10,21 @@ public class Menus {
 	public static Boolean menuPrincipal(Boolean loop, Scanner scanner) {
 		List<String> menu = new ArrayList<>();
 		menu.add("Character Sistem Manager for Roleplay Gaming");
+		menu.add(";----------------------------------------------------------------;");
+		menu.add("1. Armazenamento de Personas");
+		menu.add("2. Sistemas de combate");
+		menu.add("3. Finalizar");
+		menu.add(";----------------------------------------------------------------;");
 		
 		switch (scanner.nextInt()) {
 		case 1:
+			CSMRPG.MenuPersonagensLoop();
 			break;
 		case 2:
+			System.out.println("WIP");
 			break;
+		case 3:
+			return false;
 		default:
 			System.out.println("Opção Inválida");
 		}
@@ -32,7 +41,7 @@ public class Menus {
 		menu.add("2. Listagem de Personagens");
 		menu.add("3. Alteração ");
 		menu.add("4. \"Excluir\" Arquivo");
-		menu.add("5. Finalizar");
+		menu.add("5. Retornar");
 		menu.add(";----------------------------------------------------------------;");
 
 		for (String cadaLinha : menu) {
