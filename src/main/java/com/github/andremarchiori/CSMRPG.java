@@ -15,10 +15,7 @@ public class CSMRPG {
 		Boolean loop = true;
 		Scanner scanner = new Scanner(System.in);
 		do {
-
-			Menus.chamarMenuPrincipalPersonagens();
-
-			loop = Menus.extractedMainMenuPersonagens(loop, scanner);
+			loop = Menus.mainMenuPersonagens(loop, scanner);
 			Menus.espacamentoPadrao();
 		} while (loop == true);
 	}

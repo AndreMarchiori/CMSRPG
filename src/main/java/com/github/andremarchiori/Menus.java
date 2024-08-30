@@ -7,7 +7,41 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Menus {
-	public static Boolean extractedMainMenuPersonagens(Boolean loop, Scanner scanner) {
+	public static Boolean menuPrincipal(Boolean loop, Scanner scanner) {
+		List<String> menu = new ArrayList<>();
+		menu.add("Character Sistem Manager for Roleplay Gaming");
+		
+		switch (scanner.nextInt()) {
+		case 1:
+			break;
+		case 2:
+			break;
+		default:
+			System.out.println("Opção Inválida");
+		}
+		return true;
+	}
+
+	public static Boolean mainMenuPersonagens(Boolean loop, Scanner scanner) {
+
+		List<String> menu = new ArrayList<>();
+		menu.add("Sistema de Armazenamento de Personas");
+		menu.add(";----------------------------------------------------------------;");
+		menu.add("Insira uma opcao:");
+		menu.add("1. Cadastro de Personagem");
+		menu.add("2. Listagem de Personagens");
+		menu.add("3. Alteração ");
+		menu.add("4. \"Excluir\" Arquivo");
+		menu.add("5. Finalizar");
+		menu.add(";----------------------------------------------------------------;");
+
+		for (String cadaLinha : menu) {
+			System.out.println(cadaLinha);
+		}
+		menu.clear();
+
+		System.out.print("> ");
+
 		switch (scanner.nextInt()) {
 		case 1:
 			espacamentoPadrao();
@@ -37,7 +71,7 @@ public class Menus {
 			System.out.println(";----------------------------------------------------------------;");
 			break;
 		case 3:
-			extractedAltMenuPersonagens(scanner);
+			altMenuPersonagens(scanner);
 			break;
 		case 4:
 			IOTxt.clearTheFile();
@@ -52,11 +86,29 @@ public class Menus {
 		}
 		return loop;
 	}
-	
-	public static void extractedAltMenuPersonagens(Scanner scanner) {
+
+	public static void altMenuPersonagens(Scanner scanner) {
 		while (true) {
 			espacamentoPadrao();
-			Menus.chamarMenuAlteracaoPersonagens();
+
+			List<String> menu = new ArrayList<>();
+			menu.add("Menu de Alterações");
+			menu.add(";----------------------------------------------------------------;");
+			menu.add("Insira uma opcao:");
+			menu.add("1. Adicionar XP");
+			menu.add("2. Reduzir XP");
+			menu.add("3. Remover Personagem");
+			menu.add("4. Recuperar Personagem");
+			menu.add("5. Retornar");
+			menu.add(";----------------------------------------------------------------;");
+
+			for (String cadaLinha : menu) {
+				System.out.println(cadaLinha);
+			}
+			menu.clear();
+
+			System.out.print("> ");
+
 			switch (scanner.nextInt()) {
 			case 1:
 				espacamentoPadrao();
@@ -100,47 +152,7 @@ public class Menus {
 			}
 		}
 	}
-	
-	public static void chamarMenuPrincipalPersonagens() {
-		List<String> menu = new ArrayList<>();
-		menu.add("Sistema de Armazenamento de Personas");
-		menu.add(";----------------------------------------------------------------;");
-		menu.add("Insira uma opcao:");
-		menu.add("1. Cadastro de Personagem");
-		menu.add("2. Listagem de Personagens");
-		menu.add("3. Alteração ");
-		menu.add("4. \"Excluir\" Arquivo");
-		menu.add("5. Finalizar");
-		menu.add(";----------------------------------------------------------------;");
 
-		for (String cadaLinha : menu) {
-			System.out.println(cadaLinha);
-		}
-		menu.clear();
-
-		System.out.print("> ");
-	}
-	
-	public static void chamarMenuAlteracaoPersonagens() {
-		List<String> menu = new ArrayList<>();
-		menu.add("Menu de Alterações");
-		menu.add(";----------------------------------------------------------------;");
-		menu.add("Insira uma opcao:");
-		menu.add("1. Adicionar XP");
-		menu.add("2. Reduzir XP");
-		menu.add("3. Remover Personagem");
-		menu.add("4. Recuperar Personagem");
-		menu.add("5. Retornar");
-		menu.add(";----------------------------------------------------------------;");
-
-		for (String cadaLinha : menu) {
-			System.out.println(cadaLinha);
-		}
-		menu.clear();
-
-		System.out.print("> ");
-	}
-	
 	public static void espacamentoPadrao() {
 		System.out.printf("%n%n%n%n");
 	}
