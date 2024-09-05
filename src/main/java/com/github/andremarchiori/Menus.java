@@ -10,25 +10,50 @@ public class Menus {
 	public static Boolean menuPrincipal(Boolean loop, Scanner scanner) {
 		List<String> menu = new ArrayList<>();
 		menu.add("Character Sistem Manager for Roleplay Gaming");
-		menu.add(";----------------------------------------------------------------;");
-		menu.add("1. Armazenamento de Personas");
-		menu.add("2. Sistemas de combate");
-		menu.add("3. Finalizar");
-		menu.add(";----------------------------------------------------------------;");
+		menu.add(";================================================================;");
+		menu.add("1. Armazenamento de Personas         X");
+		menu.add("2. Sistemas de combate               X");
+		menu.add("                                     X");
+		menu.add("                                     X");
+		menu.add("5. Finalizar                         X");
+		menu.add(";================================================================;");
+		
+		for(String cadaLinha:menu) {
+			System.out.println(cadaLinha);
+		}
 		
 		switch (scanner.nextInt()) {
 		case 1:
+			Menus.espacamentoPadrao();
 			CSMRPG.MenuPersonagensLoop();
 			break;
 		case 2:
+			Menus.espacamentoPadrao();
 			System.out.println("WIP");
 			break;
-		case 3:
+		case 5:
+			Menus.espacamentoPadrao();
+			System.out.println("Finalizando");
 			return false;
 		default:
 			System.out.println("Opção Inválida");
 		}
 		return true;
+	}
+	
+	public static Boolean mainMenuCombatSis(Boolean loop, Scanner scanner) {
+		
+		List<String> menu = new ArrayList<String>();
+		menu.add("Sistemas de Combate");
+		menu.add(";-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=;");
+		menu.add("1. Adicionar \"Token\"");
+		menu.add("");
+		menu.add("");
+		menu.add("");
+		menu.add("");
+		menu.add(";-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=;");
+		
+		return loop;
 	}
 
 	public static Boolean mainMenuPersonagens(Boolean loop, Scanner scanner) {
@@ -36,12 +61,12 @@ public class Menus {
 		List<String> menu = new ArrayList<>();
 		menu.add("Sistema de Armazenamento de Personas");
 		menu.add(";----------------------------------------------------------------;");
-		menu.add("Insira uma opcao:");
-		menu.add("1. Cadastro de Personagem");
-		menu.add("2. Listagem de Personagens");
-		menu.add("3. Alteração ");
-		menu.add("4. \"Excluir\" Arquivo");
-		menu.add("5. Retornar");
+		menu.add("Insira uma opcao:                                X");
+		menu.add("1. Cadastro de Personagem                        X");
+		menu.add("2. Listagem de Personagens                       X");
+		menu.add("3. Alteração                                     X");
+		menu.add("4. \"Excluir\" Arquivo                             X");
+		menu.add("5. Retornar                                      X");
 		menu.add(";----------------------------------------------------------------;");
 
 		for (String cadaLinha : menu) {
@@ -87,7 +112,7 @@ public class Menus {
 			break;
 		case 5:
 			espacamentoPadrao();
-			System.out.println("Finalizado");
+			System.out.println("Retornando para o menu principal");
 			loop = false;
 			break;
 		default:
@@ -103,12 +128,12 @@ public class Menus {
 			List<String> menu = new ArrayList<>();
 			menu.add("Menu de Alterações");
 			menu.add(";----------------------------------------------------------------;");
-			menu.add("Insira uma opcao:");
-			menu.add("1. Adicionar XP");
-			menu.add("2. Reduzir XP");
-			menu.add("3. Remover Personagem");
-			menu.add("4. Recuperar Personagem");
-			menu.add("5. Retornar");
+			menu.add("Insira uma opcao:                                              X");
+			menu.add("1. Adicionar XP                                                X");
+			menu.add("2. Reduzir XP                                                  X");
+			menu.add("3. Remover Personagem                                          X");
+			menu.add("4. Recuperar Personagem                                        X");
+			menu.add("5. Retornar                                                    X");
 			menu.add(";----------------------------------------------------------------;");
 
 			for (String cadaLinha : menu) {
