@@ -17,22 +17,22 @@ public class Menus {
 		menu.add("                                     X");
 		menu.add("5. Finalizar                         X");
 		menu.add(";================================================================;");
-		
-		for(String cadaLinha:menu) {
+
+		for (String cadaLinha : menu) {
 			System.out.println(cadaLinha);
 		}
-		
+
 		switch (scanner.nextInt()) {
 		case 1:
-			Menus.espacamentoPadrao();
+			espacamentoPadrao();
 			CSMRPG.MenuPersonagensLoop();
 			break;
 		case 2:
-			Menus.espacamentoPadrao();
-			System.out.println("WIP");
+			espacamentoPadrao();
+			mainMenuCombatSis(loop, scanner);
 			break;
 		case 5:
-			Menus.espacamentoPadrao();
+			espacamentoPadrao();
 			System.out.println("Finalizando");
 			return false;
 		default:
@@ -40,19 +40,63 @@ public class Menus {
 		}
 		return true;
 	}
-	
+
 	public static Boolean mainMenuCombatSis(Boolean loop, Scanner scanner) {
-		
-		List<String> menu = new ArrayList<String>();
-		menu.add("Sistemas de Combate");
-		menu.add(";-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=;");
-		menu.add("1. Adicionar \"Token\"");
-		menu.add("");
-		menu.add("");
-		menu.add("");
-		menu.add("");
-		menu.add(";-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=;");
-		
+		do {
+
+			List<String> menu = new ArrayList<String>();
+			menu.add("Sistemas de Combate");
+			menu.add(";-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=;");
+			menu.add("1. Adicionar \"Token\"");
+			menu.add("2. Listar Player");
+			menu.add("3. Listar NPCS/Monstros");
+			menu.add("");
+			menu.add("5. Retornar");
+			menu.add(";-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=;");
+
+			for (String cadaLinha : menu)
+				System.out.println(cadaLinha);
+
+			switch (scanner.nextInt()) {
+			case 1:
+				espacamentoPadrao();
+				File file = new File("combatLog.txt");
+				System.out.println(" Cadastro de Personagem");
+				System.out.println(";¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨;");
+				if (file.exists()) {
+					IOTxt.combateCadastro();
+				} else {
+					try {
+						file.createNewFile();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+				System.out.println(";¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨;");
+				break;
+			case 2:
+				espacamentoPadrao();
+				System.out.println(" Lista de Players");
+				System.out.println(";****************************************************************;");
+				IOTxt.listarTokensPlayers();
+				System.out.println(";****************************************************************;");
+				break;
+			case 3:
+				espacamentoPadrao();
+				System.out.println(" Lista de NPCs/Monstros");
+				System.out.println(";****************************************************************;");
+				IOTxt.listarTokensNpcs();
+				System.out.println(";****************************************************************;");
+				break;
+			case 5:
+				espacamentoPadrao();
+				System.out.println("Retornando");
+				return false;
+			default:
+				espacamentoPadrao();
+				System.out.println("Opção inválida");
+			}
+		} while (loop = true);
 		return loop;
 	}
 

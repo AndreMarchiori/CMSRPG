@@ -11,6 +11,51 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class IOTxt {
+	
+	public static BufferedWriter openWriterCombate() throws IOException {
+		FileWriter escreveDados = new FileWriter("combatLog.txt", true);
+		return new BufferedWriter(escreveDados);
+	}
+
+	public static BufferedReader openReaderCombate() throws FileNotFoundException {
+		FileReader leitor = new FileReader("combatLog.txt");
+		return new BufferedReader(leitor);
+	}
+	
+	public static void clearTheFileCombate() {
+		try {
+			FileWriter fwOb = new FileWriter("combatLog.txt", false);
+			PrintWriter pwOb = new PrintWriter(fwOb, false);
+			pwOb.flush();
+			pwOb.close();
+			fwOb.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void combateCadastro() {
+		combateChar token = new combateChar();
+		try {
+			token.setId(proximoIdCombate());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("id = " + token.getId());
+		@SuppressWarnings("resource")
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Insira o nome do token");
+		token.setName(scanner.nextLine());
+
+		System.out.println("Insira a vida maxima do personagem");
+		token.setMaxHp(scanner.nextInt());
+		
+		System.out.println("Insira o tipo do personagem (1-Player|2-NPC/Monstro)");
+		token.setType(scanner.nextInt());
+
+		salvarPersonagemCombate(token);
+		System.out.println("Cadastro Concluido");
+	}
 
 	public static BufferedWriter openWriterPersonagens() throws IOException {
 		FileWriter escreveDados = new FileWriter("characters.txt", true);
@@ -253,6 +298,21 @@ public class IOTxt {
 
 		return ++maiorId;
 	}
+	
+	public static int proximoIdCombate() throws IOException {
+		int maiorId = 0;
+
+		BufferedReader bufferedReader = IOTxt.openReaderCombate();
+		String linha = bufferedReader.readLine();
+		while (linha != null) {
+			String[] colunas = linha.split(";");
+			maiorId = obtencaoDeMaiorID(maiorId, linha, colunas[0]);
+			linha = bufferedReader.readLine();
+		}
+		bufferedReader.close();
+
+		return ++maiorId;
+	}
 
 	private static int obtencaoDeMaiorID(int maiorId, String linha, String coluna) {
 		try {
@@ -270,6 +330,17 @@ public class IOTxt {
 	private static void salvarPersonagem(Personagem personagem) {
 		try {
 			BufferedWriter bufferedWriter = IOTxt.openWriterPersonagens();
+			bufferedWriter.write(personagem.toString());
+			bufferedWriter.newLine();
+			bufferedWriter.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private static void salvarPersonagemCombate(combateChar personagem) {
+		try {
+			BufferedWriter bufferedWriter = IOTxt.openWriterCombate();
 			bufferedWriter.write(personagem.toString());
 			bufferedWriter.newLine();
 			bufferedWriter.close();
@@ -306,6 +377,50 @@ public class IOTxt {
 				}
 				System.out.println(
 						String.format("  %-5s%-35s%-10s%-12s", colunas[0], colunas[1], colunas[2], colunas[3]));
+				linhas = bufferedReader.readLine();
+			}
+
+			bufferedReader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void listarTokensPlayers() {
+		try {
+			BufferedReader bufferedReader = IOTxt.openReaderCombate();
+			String linhas = bufferedReader.readLine();
+			System.out.printf("  %-5s%-15s%s/%s%n", "ID", "NOME", "VidaMax/VidaAtual");
+			while (linhas != null) {
+				String[] colunas = linhas.split(";");
+				if (Integer.parseInt(colunas[4]) != 1 || Integer.parseInt(colunas[5]) == 0) {
+					linhas = bufferedReader.readLine();
+					continue;
+				}
+				System.out.println(
+						String.format("  %-5s%-15s%s/%s", colunas[0], colunas[1], colunas[2], colunas[3]));
+				linhas = bufferedReader.readLine();
+			}
+
+			bufferedReader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void listarTokensNpcs() {
+		try {
+			BufferedReader bufferedReader = IOTxt.openReaderCombate();
+			String linhas = bufferedReader.readLine();
+			System.out.printf("  %-5s%-15s%s/%s%n", "ID", "NOME", "VidaMax/VidaAtual");
+			while (linhas != null) {
+				String[] colunas = linhas.split(";");
+				if (Integer.parseInt(colunas[4]) != 2 || Integer.parseInt(colunas[5]) == 0) {
+					linhas = bufferedReader.readLine();
+					continue;
+				}
+				System.out.println(
+						String.format("  %-5s%-15s%s/%s", colunas[0], colunas[1], colunas[2], colunas[3]));
 				linhas = bufferedReader.readLine();
 			}
 
