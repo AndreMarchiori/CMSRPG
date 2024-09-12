@@ -8,19 +8,6 @@ import java.util.Scanner;
 
 public class Menus {
 	public static Boolean menuPrincipal(Boolean loop, Scanner scanner) {
-		List<String> menu = new ArrayList<>();
-		menu.add("Character Sistem Manager for Roleplay Gaming");
-		menu.add(";================================================================;");
-		menu.add("1. Armazenamento de Personas         X");
-		menu.add("2. Sistemas de combate               X");
-		menu.add("                                     X");
-		menu.add("                                     X");
-		menu.add("5. Finalizar                         X");
-		menu.add(";================================================================;");
-
-		for (String cadaLinha : menu) {
-			System.out.println(cadaLinha);
-		}
 
 		switch (scanner.nextInt()) {
 		case 1:
