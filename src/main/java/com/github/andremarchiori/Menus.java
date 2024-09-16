@@ -12,7 +12,7 @@ public class Menus {
 		switch (scanner.nextInt()) {
 		case 1:
 			espacamentoPadrao();
-			CSMRPG.MenuPersonagensLoop();
+			Main.MenuPersonagensLoop();
 			break;
 		case 2:
 			espacamentoPadrao();

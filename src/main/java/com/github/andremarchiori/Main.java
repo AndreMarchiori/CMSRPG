@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class CSMRPG {
+public class Main {
 	
 	public static Map<Integer, Personagem> personagens;
 

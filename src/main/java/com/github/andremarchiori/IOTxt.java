@@ -94,19 +94,19 @@ public class IOTxt {
 				Menus.espacamentoPadrao();
 				listarPersonagens();
 				Menus.espacamentoPadrao();
-			} else if (!CSMRPG.personagens.containsKey(idPersonagem)) {
+			} else if (!Main.personagens.containsKey(idPersonagem)) {
 				System.err.println("Id não encontrado. Insira -1 para encerrar ou tente novamente.");
 			} else {
 				break;
 			}
 		}
 
-		CSMRPG.personagens.get(idPersonagem).setExLogic(0);
+		Main.personagens.get(idPersonagem).setExLogic(0);
 		if (listaDePersonagens.isEmpty()) {
 
 			try {
 				for (int i = 0; i < proximoId() - 1; i++) {
-					listaDePersonagens.add(CSMRPG.personagens.get(i + 1));
+					listaDePersonagens.add(Main.personagens.get(i + 1));
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -132,19 +132,19 @@ public class IOTxt {
 				Menus.espacamentoPadrao();
 				listarDesativados();
 				Menus.espacamentoPadrao();
-			} else if (!CSMRPG.personagens.containsKey(idPersonagem)) {
+			} else if (!Main.personagens.containsKey(idPersonagem)) {
 				System.err.println("Id não encontrado. Insira -1 para encerrar ou tente novamente.");
 			} else {
 				break;
 			}
 		}
 
-		CSMRPG.personagens.get(idPersonagem).setExLogic(1);
+		Main.personagens.get(idPersonagem).setExLogic(1);
 		if (listaDePersonagens.isEmpty()) {
 
 			try {
 				for (int i = 0; i < proximoId() - 1; i++) {
-					listaDePersonagens.add(CSMRPG.personagens.get(i + 1));
+					listaDePersonagens.add(Main.personagens.get(i + 1));
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -170,25 +170,25 @@ public class IOTxt {
 				Menus.espacamentoPadrao();
 				listarPersonagens();
 				Menus.espacamentoPadrao();
-			} else if (!CSMRPG.personagens.containsKey(idPersonagem)) {
+			} else if (!Main.personagens.containsKey(idPersonagem)) {
 				System.err.println("Id Inválido. Insira -1 para encerrar ou tente novamente.");
 			} else {
 				break;
 			}
 		}
 		carregarPersonagens();
-		if (CSMRPG.personagens.get(idPersonagem).getExLogic() == 0) {
+		if (Main.personagens.get(idPersonagem).getExLogic() == 0) {
 			System.err.println("Id Inválido.");
 			return;
 		}
 		System.out.printf("%nInsira o valor de experiência a ser adicionado: ");
 
-		CSMRPG.personagens.get(idPersonagem).addExperience(scanner.nextLong());
+		Main.personagens.get(idPersonagem).addExperience(scanner.nextLong());
 		if (listaDePersonagens.isEmpty()) {
 
 			try {
 				for (int i = 0; i < proximoId() - 1; i++) {
-					listaDePersonagens.add(CSMRPG.personagens.get(i + 1));
+					listaDePersonagens.add(Main.personagens.get(i + 1));
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -214,25 +214,25 @@ public class IOTxt {
 				Menus.espacamentoPadrao();
 				listarPersonagens();
 				Menus.espacamentoPadrao();
-			} else if (!CSMRPG.personagens.containsKey(idPersonagem)) {
+			} else if (!Main.personagens.containsKey(idPersonagem)) {
 				System.err.println("Id Inválido. Insira -1 para encerrar ou tente novamente.");
 			} else {
 				break;
 			}
 		}
 		carregarPersonagens();
-		if (CSMRPG.personagens.get(idPersonagem).getExLogic() == 0) {
+		if (Main.personagens.get(idPersonagem).getExLogic() == 0) {
 			System.err.println("Id Inválido.");
 			return;
 		}
 		System.out.printf("%nInsira o valor de experiência a ser reduzido(valores positivo apenas): ");
 
-		CSMRPG.personagens.get(idPersonagem).subExperience(scanner.nextLong());
+		Main.personagens.get(idPersonagem).subExperience(scanner.nextLong());
 		if (listaDePersonagens.isEmpty()) {
 
 			try {
 				for (int i = 0; i < proximoId() - 1; i++) {
-					listaDePersonagens.add(CSMRPG.personagens.get(i + 1));
+					listaDePersonagens.add(Main.personagens.get(i + 1));
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -265,7 +265,7 @@ public class IOTxt {
 			String linha = bufferedReader.readLine();
 			while (linha != null) {
 				Personagem personagem = parsePersonagem(linha);
-				CSMRPG.personagens.put(personagem.getId(), personagem);
+				Main.personagens.put(personagem.getId(), personagem);
 				linha = bufferedReader.readLine();
 			}
 		} catch (IOException e) {
