@@ -15,7 +15,7 @@ public class MenuFrame extends JFrame {
 	public MenuFrame() {
 		super("CSMRPG");
 		// obtenção de icone
-		URL iconURL = getClass().getResource("/img/regu.png");
+		URL iconURL = getClass().getResource("regu.png");
 		ImageIcon icon = new ImageIcon(iconURL);
 		setIconImage(icon.getImage());
 

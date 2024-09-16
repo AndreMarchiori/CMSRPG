@@ -33,7 +33,7 @@ public class MainMenu extends MenuFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			new MenuPersonagens();
+			MenuPersonagens menuPersonagens = new MenuPersonagens();
 			setVisible(false);
 			}
 		});

@@ -30,6 +30,14 @@ public class MenuPersonagens extends MenuFrame{
 		
 		btnCadastro = new JButton("Cadastrar Personagem");
 		btnCadastro.setBounds(115, 150, 250, 45);
+		btnCadastro.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MenuCadastro menuCadastro = new MenuCadastro();
+				setVisible(false);
+			}
+		});
 		add(btnCadastro);
 		
 		btnLista = new JButton("Listar Personagens");
@@ -48,6 +56,7 @@ public class MenuPersonagens extends MenuFrame{
 				"-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
 		lblMainLabel.setBounds(0, 380, 510, 15);
 		add(lblMainLabel);
+		
 		btnExit.addActionListener(new ActionListener() {
 
 			@Override
