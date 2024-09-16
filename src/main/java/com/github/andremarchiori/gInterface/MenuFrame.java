@@ -1,4 +1,4 @@
-package gInterface;
+package com.github.andremarchiori.gInterface;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

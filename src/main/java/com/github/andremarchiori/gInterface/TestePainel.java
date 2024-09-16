@@ -1,4 +1,4 @@
-package gInterface;
+package com.github.andremarchiori.gInterface;
 
 import javax.swing.JFrame;
 
