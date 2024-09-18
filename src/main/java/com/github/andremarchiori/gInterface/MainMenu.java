@@ -47,7 +47,9 @@ public class MainMenu extends MenuFrame {
 				"-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
 		lblMainLabel.setBounds(0, 380, 510, 15);
 		add(lblMainLabel);
-
+		
 		repaint();
+		
+		btnExit.setText("Sair");
 	}
 }

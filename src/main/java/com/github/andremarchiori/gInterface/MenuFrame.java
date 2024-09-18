@@ -28,7 +28,7 @@ public class MenuFrame extends JFrame {
 		setLocationRelativeTo(null);
 
 		// botão de Sair
-		btnExit = new JButton("Sair");
+		btnExit = new JButton("Voltar");
 		btnExit.setBounds(10, 400, 80, 45);
 		btnExit.addActionListener(new ActionListener() {
 

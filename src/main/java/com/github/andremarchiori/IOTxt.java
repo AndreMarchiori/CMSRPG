@@ -327,7 +327,7 @@ public class IOTxt {
 		return maiorId;
 	}
 
-	private static void salvarPersonagem(Personagem personagem) {
+	public static void salvarPersonagem(Personagem personagem) {
 		try {
 			BufferedWriter bufferedWriter = IOTxt.openWriterPersonagens();
 			bufferedWriter.write(personagem.toString());
