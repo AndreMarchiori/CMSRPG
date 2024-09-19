@@ -106,6 +106,9 @@ public class MenuCadastro extends MenuFrame {
 				add(lblConfirm);
 				MouseHandler handler = new MouseHandler();
 				addMouseMotionListener(handler);
+				txtNome.setText("");
+				txtExp.setText("");
+				
 				repaint();
 			}
 		});
