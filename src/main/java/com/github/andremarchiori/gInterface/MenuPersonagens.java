@@ -34,21 +34,40 @@ public class MenuPersonagens extends MenuFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				@SuppressWarnings("unused")
 				MenuCadastro menuCadastro = new MenuCadastro();
-				setVisible(false);
+				dispose();
 			}
 		});
 		add(btnCadastro);
 		
 		btnLista = new JButton("Listar Personagens");
 		btnLista.setBounds(115, 200, 250, 45);
+		btnLista.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				@SuppressWarnings("unused")
+				ButtonListar listar = new ButtonListar();
+				dispose();
+			}
+		});
 		add(btnLista);
 		
 		btnAlteracao = new JButton("Alterar dados");
 		btnAlteracao.setBounds(115, 250, 250, 45);
+		btnAlteracao.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				@SuppressWarnings("unused")
+				MenuAlteracao alteracao = new MenuAlteracao();
+				dispose();
+			}
+		});
 		add(btnAlteracao);
-		
-		btnExcluir = new JButton("Excluir Personagem");
+	
+		btnExcluir = new JButton("Excluir Data");
 		btnExcluir.setBounds(115, 300, 250, 45);
 		add(btnExcluir);
 

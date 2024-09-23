@@ -1,7 +1,5 @@
 package com.github.andremarchiori.gInterface;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -12,11 +10,11 @@ import java.util.InputMismatchException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.github.andremarchiori.IOTxt;
 import com.github.andremarchiori.Personagem;
+
 
 public class MenuCadastro extends MenuFrame {
 	/**
