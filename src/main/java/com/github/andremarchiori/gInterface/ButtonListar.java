@@ -52,17 +52,17 @@ public class ButtonListar extends MenuFrame{
 	
 	public static void listarPersonagens() {
 		try {
-			BufferedReader bufferedReader = IOTxt.openReaderPersonagens();
+			BufferedReader bufferedReader = iot.openReaderPersonagens();
 			String linhas = bufferedReader.readLine();
 			txtLista.append(String.format("%s%n", "-----------------------------------------------------------------------------------------------------------------"));
-			txtLista.append(String.format("  %-5s%-30s%-20s%-12s%n", "ID", "Nome", "Nível", "Experiencia"));
+			txtLista.append(String.format("  %-5s| %-30s| %-20s| %-12s%n", "ID", "Nome", "Nível", "Experiencia"));
 			while (linhas != null) {
 				String[] colunas = linhas.split(";");
 				if (Integer.parseInt(colunas[4]) == 0) {
 					linhas = bufferedReader.readLine();
 					continue;
 				}
-				txtLista.append(String.format("  %-5s%-35s%-20s%-12s%n", colunas[0], colunas[1], colunas[2], colunas[3]));
+				txtLista.append(String.format("  %-5s| %-35s| %-20s| %-12s%n", colunas[0], colunas[1], colunas[2], colunas[3]));
 				linhas = bufferedReader.readLine();
 			}
 			txtLista.append(String.format("%s%n", "-----------------------------------------------------------------------------------------------------------------"));

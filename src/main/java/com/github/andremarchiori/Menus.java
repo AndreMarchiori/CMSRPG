@@ -7,6 +7,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Menus {
+	static IOTxt iot = new IOTxt();
+	
+	public Menus() {
+		
+	}
+	
 	public static Boolean menuPrincipal(Boolean loop, Scanner scanner) {
 
 		switch (scanner.nextInt()) {
@@ -51,7 +57,7 @@ public class Menus {
 				System.out.println(" Cadastro de Personagem");
 				System.out.println(";¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨;");
 				if (file.exists()) {
-					IOTxt.combateCadastro();
+					iot.combateCadastro();
 				} else {
 					try {
 						file.createNewFile();
@@ -65,14 +71,14 @@ public class Menus {
 				espacamentoPadrao();
 				System.out.println(" Lista de Players");
 				System.out.println(";****************************************************************;");
-				IOTxt.listarTokensPlayers();
+				iot.listarTokensPlayers();
 				System.out.println(";****************************************************************;");
 				break;
 			case 3:
 				espacamentoPadrao();
 				System.out.println(" Lista de NPCs/Monstros");
 				System.out.println(";****************************************************************;");
-				IOTxt.listarTokensNpcs();
+				iot.listarTokensNpcs();
 				System.out.println(";****************************************************************;");
 				break;
 			case 5:
@@ -115,7 +121,7 @@ public class Menus {
 			System.out.println(";----------------------------------------------------------------;");
 			if (file.exists()) {
 				try {
-					IOTxt.cadastrarPersonagem();
+					iot.cadastrarPersonagem();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -132,14 +138,14 @@ public class Menus {
 			espacamentoPadrao();
 			System.out.println(" Listagem de Personagens");
 			System.out.println(";----------------------------------------------------------------;");
-			IOTxt.listarPersonagens();
+			iot.listarPersonagens();
 			System.out.println(";----------------------------------------------------------------;");
 			break;
 		case 3:
 			altMenuPersonagens(scanner);
 			break;
 		case 4:
-			IOTxt.clearTheFile();
+			iot.clearTheFile();
 			break;
 		case 5:
 			espacamentoPadrao();
@@ -179,32 +185,32 @@ public class Menus {
 				espacamentoPadrao();
 				System.out.println(" Adição de XP");
 				System.out.println(";----------------------------------------------------------------;");
-				IOTxt.carregarPersonagens();
-				IOTxt.callAdd(scanner);
+				iot.carregarPersonagens();
+				iot.callAdd(scanner);
 				System.out.println(";----------------------------------------------------------------;");
 				break;
 			case 2:
 				espacamentoPadrao();
 				System.out.println(" Redução de XP");
 				System.out.println(";----------------------------------------------------------------;");
-				IOTxt.carregarPersonagens();
-				IOTxt.callSub(scanner);
+				iot.carregarPersonagens();
+				iot.callSub(scanner);
 				System.out.println(";----------------------------------------------------------------;");
 				break;
 			case 3:
-				IOTxt.carregarPersonagens();
+				iot.carregarPersonagens();
 				espacamentoPadrao();
 				System.out.println(" Remoção de personagem");
 				System.out.println(";----------------------------------------------------------------;");
-				IOTxt.callRemoves(scanner);
+				iot.callRemoves(scanner);
 				System.out.println(";----------------------------------------------------------------;");
 				break;
 			case 4:
-				IOTxt.carregarPersonagens();
+				iot.carregarPersonagens();
 				espacamentoPadrao();
 				System.out.println(" Recuperação de Personagem");
 				System.out.println(";----------------------------------------------------------------;");
-				IOTxt.callRecuperacao(scanner);
+				iot.callRecuperacao(scanner);
 				System.out.println(";----------------------------------------------------------------;");
 				break;
 			case 5:

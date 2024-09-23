@@ -12,17 +12,20 @@ import java.util.Scanner;
 
 public class IOTxt {
 	
-	public static BufferedWriter openWriterCombate() throws IOException {
+	public IOTxt() {
+	}
+	
+	public BufferedWriter openWriterCombate() throws IOException {
 		FileWriter escreveDados = new FileWriter("combatLog.txt", true);
 		return new BufferedWriter(escreveDados);
 	}
 
-	public static BufferedReader openReaderCombate() throws FileNotFoundException {
+	public BufferedReader openReaderCombate() throws FileNotFoundException {
 		FileReader leitor = new FileReader("combatLog.txt");
 		return new BufferedReader(leitor);
 	}
 	
-	public static void clearTheFileCombate() {
+	public void clearTheFileCombate() {
 		try {
 			FileWriter fwOb = new FileWriter("combatLog.txt", false);
 			PrintWriter pwOb = new PrintWriter(fwOb, false);
@@ -34,7 +37,7 @@ public class IOTxt {
 		}
 	}
 	
-	public static void combateCadastro() {
+	public void combateCadastro() {
 		combateChar token = new combateChar();
 		try {
 			token.setId(proximoIdCombate());
@@ -53,21 +56,21 @@ public class IOTxt {
 		System.out.println("Insira o tipo do personagem (1-Player|2-NPC/Monstro)");
 		token.setType(scanner.nextInt());
 
-		salvarPersonagemCombate(token);
+		this.salvarPersonagemCombate(token);
 		System.out.println("Cadastro Concluido");
 	}
 
-	public static BufferedWriter openWriterPersonagens() throws IOException {
+	public BufferedWriter openWriterPersonagens() throws IOException {
 		FileWriter escreveDados = new FileWriter("characters.txt", true);
 		return new BufferedWriter(escreveDados);
 	}
 
-	public static BufferedReader openReaderPersonagens() throws FileNotFoundException {
+	public BufferedReader openReaderPersonagens() throws FileNotFoundException {
 		FileReader leitor = new FileReader("characters.txt");
 		return new BufferedReader(leitor);
 	}
 
-	public static void clearTheFile() {
+	public void clearTheFile() {
 		try {
 			FileWriter fwOb = new FileWriter("characters.txt", false);
 			PrintWriter pwOb = new PrintWriter(fwOb, false);
@@ -79,7 +82,7 @@ public class IOTxt {
 		}
 	}
 
-	public static void callRemoves(Scanner scanner) {
+	public void callRemoves(Scanner scanner) {
 		int idPersonagem;
 		ArrayList<Personagem> listaDePersonagens = new ArrayList<>();
 
@@ -92,7 +95,7 @@ public class IOTxt {
 				return;
 			} else if (idPersonagem == 0) {
 				Menus.espacamentoPadrao();
-				listarPersonagens();
+				this.listarPersonagens();
 				Menus.espacamentoPadrao();
 			} else if (!Main.personagens.containsKey(idPersonagem)) {
 				System.err.println("Id não encontrado. Insira -1 para encerrar ou tente novamente.");
@@ -112,12 +115,12 @@ public class IOTxt {
 				e.printStackTrace();
 			}
 		}
-		IOTxt.clearTheFile();
-		salvarPersonagem(listaDePersonagens);
+		this.clearTheFile();
+		this.salvarPersonagem(listaDePersonagens);
 		System.out.println("BaNiDo");
 	}
 
-	public static void callRecuperacao(Scanner scanner) {
+	public void callRecuperacao(Scanner scanner) {
 		int idPersonagem;
 		ArrayList<Personagem> listaDePersonagens = new ArrayList<>();
 
@@ -130,7 +133,7 @@ public class IOTxt {
 				return;
 			} else if (idPersonagem == 0) {
 				Menus.espacamentoPadrao();
-				listarDesativados();
+				this.listarDesativados();
 				Menus.espacamentoPadrao();
 			} else if (!Main.personagens.containsKey(idPersonagem)) {
 				System.err.println("Id não encontrado. Insira -1 para encerrar ou tente novamente.");
@@ -150,12 +153,12 @@ public class IOTxt {
 				e.printStackTrace();
 			}
 		}
-		IOTxt.clearTheFile();
-		salvarPersonagem(listaDePersonagens);
+		this.clearTheFile();
+		this.salvarPersonagem(listaDePersonagens);
 		System.out.println("Personagem restaurado");
 	}
 
-	public static void callAdd(Scanner scanner) {
+	public void callAdd(Scanner scanner) {
 		int idPersonagem;
 		ArrayList<Personagem> listaDePersonagens = new ArrayList<>();
 
@@ -168,7 +171,7 @@ public class IOTxt {
 				return;
 			} else if (idPersonagem == 0) {
 				Menus.espacamentoPadrao();
-				listarPersonagens();
+				this.listarPersonagens();
 				Menus.espacamentoPadrao();
 			} else if (!Main.personagens.containsKey(idPersonagem)) {
 				System.err.println("Id Inválido. Insira -1 para encerrar ou tente novamente.");
@@ -176,7 +179,7 @@ public class IOTxt {
 				break;
 			}
 		}
-		carregarPersonagens();
+		this.carregarPersonagens();
 		if (Main.personagens.get(idPersonagem).getExLogic() == 0) {
 			System.err.println("Id Inválido.");
 			return;
@@ -194,12 +197,12 @@ public class IOTxt {
 				e.printStackTrace();
 			}
 		}
-		IOTxt.clearTheFile();
-		salvarPersonagem(listaDePersonagens);
+		this.clearTheFile();
+		this.salvarPersonagem(listaDePersonagens);
 		System.out.println("Adição Completa");
 	}
 
-	public static void callSub(Scanner scanner) {
+	public void callSub(Scanner scanner) {
 		int idPersonagem;
 		ArrayList<Personagem> listaDePersonagens = new ArrayList<>();
 
@@ -212,7 +215,7 @@ public class IOTxt {
 				return;
 			} else if (idPersonagem == 0) {
 				Menus.espacamentoPadrao();
-				listarPersonagens();
+				this.listarPersonagens();
 				Menus.espacamentoPadrao();
 			} else if (!Main.personagens.containsKey(idPersonagem)) {
 				System.err.println("Id Inválido. Insira -1 para encerrar ou tente novamente.");
@@ -220,7 +223,7 @@ public class IOTxt {
 				break;
 			}
 		}
-		carregarPersonagens();
+		this.carregarPersonagens();
 		if (Main.personagens.get(idPersonagem).getExLogic() == 0) {
 			System.err.println("Id Inválido.");
 			return;
@@ -238,12 +241,12 @@ public class IOTxt {
 				e.printStackTrace();
 			}
 		}
-		IOTxt.clearTheFile();
-		salvarPersonagem(listaDePersonagens);
+		this.clearTheFile();
+		this.salvarPersonagem(listaDePersonagens);
 		System.out.println("Subtração Completa");
 	}
 
-	public static void cadastrarPersonagem() throws IOException {
+	public void cadastrarPersonagem() throws IOException {
 		Personagem personagem = new Personagem();
 		personagem.setId(proximoId());
 		System.out.println("id = " + personagem.getId());
@@ -255,16 +258,16 @@ public class IOTxt {
 		System.out.println("Insira o xp do personagem");
 		personagem.setExperience(scanner.nextLong());
 
-		salvarPersonagem(personagem);
+		this.salvarPersonagem(personagem);
 		System.out.println("Cadastro Concluido");
 	}
 
-	public static void carregarPersonagens() {
+	public void carregarPersonagens() {
 		try {
-			BufferedReader bufferedReader = IOTxt.openReaderPersonagens();
+			BufferedReader bufferedReader = this.openReaderPersonagens();
 			String linha = bufferedReader.readLine();
 			while (linha != null) {
-				Personagem personagem = parsePersonagem(linha);
+				Personagem personagem = this.parsePersonagem(linha);
 				Main.personagens.put(personagem.getId(), personagem);
 				linha = bufferedReader.readLine();
 			}
@@ -273,7 +276,7 @@ public class IOTxt {
 		}
 	}
 
-	private static Personagem parsePersonagem(String linha) {
+	private Personagem parsePersonagem(String linha) {
 		String[] colunas = linha.split(";");
 		Personagem personagem = new Personagem();
 		personagem.setId(Integer.parseInt(colunas[0]));
@@ -284,14 +287,14 @@ public class IOTxt {
 		return personagem;
 	}
 
-	public static int proximoId() throws IOException {
+	public int proximoId() throws IOException {
 		int maiorId = 0;
 
-		BufferedReader bufferedReader = IOTxt.openReaderPersonagens();
+		BufferedReader bufferedReader = this.openReaderPersonagens();
 		String linha = bufferedReader.readLine();
 		while (linha != null) {
 			String[] colunas = linha.split(";");
-			maiorId = obtencaoDeMaiorID(maiorId, linha, colunas[0]);
+			maiorId = this.obtencaoDeMaiorID(maiorId, linha, colunas[0]);
 			linha = bufferedReader.readLine();
 		}
 		bufferedReader.close();
@@ -299,14 +302,14 @@ public class IOTxt {
 		return ++maiorId;
 	}
 	
-	public static int proximoIdCombate() throws IOException {
+	public int proximoIdCombate() throws IOException {
 		int maiorId = 0;
 
-		BufferedReader bufferedReader = IOTxt.openReaderCombate();
+		BufferedReader bufferedReader = this.openReaderCombate();
 		String linha = bufferedReader.readLine();
 		while (linha != null) {
 			String[] colunas = linha.split(";");
-			maiorId = obtencaoDeMaiorID(maiorId, linha, colunas[0]);
+			maiorId = this.obtencaoDeMaiorID(maiorId, linha, colunas[0]);
 			linha = bufferedReader.readLine();
 		}
 		bufferedReader.close();
@@ -314,7 +317,7 @@ public class IOTxt {
 		return ++maiorId;
 	}
 
-	private static int obtencaoDeMaiorID(int maiorId, String linha, String coluna) {
+	private int obtencaoDeMaiorID(int maiorId, String linha, String coluna) {
 		try {
 			var id = Integer.parseInt(coluna);
 			if (id > maiorId) {
@@ -327,9 +330,9 @@ public class IOTxt {
 		return maiorId;
 	}
 
-	public static void salvarPersonagem(Personagem personagem) {
+	public void salvarPersonagem(Personagem personagem) {
 		try {
-			BufferedWriter bufferedWriter = IOTxt.openWriterPersonagens();
+			BufferedWriter bufferedWriter = this.openWriterPersonagens();
 			bufferedWriter.write(personagem.toString());
 			bufferedWriter.newLine();
 			bufferedWriter.close();
@@ -338,9 +341,9 @@ public class IOTxt {
 		}
 	}
 	
-	private static void salvarPersonagemCombate(combateChar personagem) {
+	private void salvarPersonagemCombate(combateChar personagem) {
 		try {
-			BufferedWriter bufferedWriter = IOTxt.openWriterCombate();
+			BufferedWriter bufferedWriter = openWriterCombate();
 			bufferedWriter.write(personagem.toString());
 			bufferedWriter.newLine();
 			bufferedWriter.close();
@@ -349,11 +352,11 @@ public class IOTxt {
 		}
 	}
 
-	private static void salvarPersonagem(ArrayList<Personagem> listaDePersonagens) {
+	private void salvarPersonagem(ArrayList<Personagem> listaDePersonagens) {
 		try {
-			BufferedWriter bufferedWriter = IOTxt.openWriterPersonagens();
+			BufferedWriter bufferedWriter = this.openWriterPersonagens();
 			for (int j = 0; j < listaDePersonagens.size(); j++) {
-				bufferedWriter = IOTxt.openWriterPersonagens();
+				bufferedWriter = this.openWriterPersonagens();
 				bufferedWriter.write(listaDePersonagens.get(j).toString());
 				bufferedWriter.newLine();
 				bufferedWriter.close();
@@ -364,9 +367,9 @@ public class IOTxt {
 		}
 	}
 
-	public static void listarPersonagens() {
+	public void listarPersonagens() {
 		try {
-			BufferedReader bufferedReader = IOTxt.openReaderPersonagens();
+			BufferedReader bufferedReader = this.openReaderPersonagens();
 			String linhas = bufferedReader.readLine();
 			System.out.printf("  %-5s%-35s%-10s%-12s%n", "ID", "NOME", "LEVEL", "EXPERIENCIA");
 			while (linhas != null) {
@@ -386,9 +389,9 @@ public class IOTxt {
 		}
 	}
 	
-	public static void listarTokensPlayers() {
+	public void listarTokensPlayers() {
 		try {
-			BufferedReader bufferedReader = IOTxt.openReaderCombate();
+			BufferedReader bufferedReader = this.openReaderCombate();
 			String linhas = bufferedReader.readLine();
 			System.out.printf("  %-5s%-15s%s/%s%n", "ID", "NOME", "VidaMax/VidaAtual");
 			while (linhas != null) {
@@ -408,9 +411,9 @@ public class IOTxt {
 		}
 	}
 	
-	public static void listarTokensNpcs() {
+	public void listarTokensNpcs() {
 		try {
-			BufferedReader bufferedReader = IOTxt.openReaderCombate();
+			BufferedReader bufferedReader = this.openReaderCombate();
 			String linhas = bufferedReader.readLine();
 			System.out.printf("  %-5s%-15s%s/%s%n", "ID", "NOME", "VidaMax/VidaAtual");
 			while (linhas != null) {
@@ -430,9 +433,9 @@ public class IOTxt {
 		}
 	}
 
-	public static void listarDesativados() {
+	public void listarDesativados() {
 		try {
-			BufferedReader bufferedReader = IOTxt.openReaderPersonagens();
+			BufferedReader bufferedReader = this.openReaderPersonagens();
 			String linhas = bufferedReader.readLine();
 			System.out.printf("  %-5s%-35s%-10s%-12s%n", "ID", "NOME", "LEVEL", "EXPERIENCIA");
 			while (linhas != null) {

@@ -8,9 +8,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import com.github.andremarchiori.IOTxt;
+
 @SuppressWarnings("serial")
 public class MenuFrame extends JFrame {
 	public JButton btnExit;
+	
+	static IOTxt iot = new IOTxt();
 
 	public MenuFrame() {
 		super("CSMRPG");

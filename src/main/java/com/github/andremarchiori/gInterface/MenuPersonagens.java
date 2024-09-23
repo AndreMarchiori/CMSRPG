@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 
 @SuppressWarnings("serial")
 public class MenuPersonagens extends MenuFrame{
+	private JLabel lblConfirm;
 	private JLabel lblMainLabel;
 	private JButton btnCadastro;
 	private JButton btnLista;
@@ -27,6 +28,9 @@ public class MenuPersonagens extends MenuFrame{
 		lblMainLabel = new JLabel("Insira uma das opções");
 		lblMainLabel.setBounds(180, 50, 300, 15);
 		add(lblMainLabel);
+		
+		lblConfirm = new JLabel("");
+		//a ser adicionado
 		
 		btnCadastro = new JButton("Cadastrar Personagem");
 		btnCadastro.setBounds(115, 150, 250, 45);
@@ -69,6 +73,14 @@ public class MenuPersonagens extends MenuFrame{
 	
 		btnExcluir = new JButton("Excluir Data");
 		btnExcluir.setBounds(115, 300, 250, 45);
+		btnExcluir.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				iot.clearTheFile();
+				//adicionar confirmação
+			}
+		});
 		add(btnExcluir);
 
 		lblMainLabel = new JLabel(

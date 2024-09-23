@@ -9,23 +9,25 @@ public class Main {
 	public static Map<Integer, Personagem> personagens;
 
 	public static void main(String[] args) {
+		Menus menus = new Menus();
 		Boolean loop = true;
 		Scanner scanner = new Scanner(System.in);
 		do {
-			loop = Menus.menuPrincipal(loop, scanner);
-			Menus.espacamentoPadrao();
+			loop = menus.menuPrincipal(loop, scanner);
+			menus.espacamentoPadrao();
 		}while(loop == true);
 	}
 	
 	public static void MenuPersonagensLoop() { //essencial nesta classe
+		Menus menus = new Menus();
 		personagens = new HashMap<>();
 
 		Boolean loopPersonagens = true;
 		Scanner scannerPersonagens = new Scanner(System.in);
 		
 		do {
-			loopPersonagens = Menus.mainMenuPersonagens(loopPersonagens, scannerPersonagens);
-			Menus.espacamentoPadrao();
+			loopPersonagens = menus.mainMenuPersonagens(loopPersonagens, scannerPersonagens);
+			menus.espacamentoPadrao();
 		} while (loopPersonagens == true);
 	}
 }

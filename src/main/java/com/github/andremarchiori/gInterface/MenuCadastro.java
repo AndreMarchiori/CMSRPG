@@ -1,5 +1,6 @@
 package com.github.andremarchiori.gInterface;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -54,7 +55,7 @@ public class MenuCadastro extends MenuFrame {
 
 		lblId = new JLabel();
 		try {
-			lblId.setText(String.format("%d", IOTxt.proximoId()));
+			lblId.setText(String.format("%d", iot.proximoId()));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -75,37 +76,45 @@ public class MenuCadastro extends MenuFrame {
 		txtExp.setBounds(125, 230, 250, 45);
 		add(txtExp);
 
-		lblConfirm = new JLabel("Personagem criado com sucesso!");
+		lblConfirm = new JLabel("");
 		lblConfirm.setBounds(150, 330, 200, 45);
-
+		
 		btnCadastro = new JButton("Cadastrar");
 		btnCadastro.setBounds(150, 290, 200, 45);
 		btnCadastro.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				MouseHandler handler = new MouseHandler();
+				addMouseMotionListener(handler);
 				try {
 					String nome = txtNome.getText();
 					long xp = Long.parseLong(txtExp.getText());
-					cadastrarPersonagem(IOTxt.proximoId(), nome, xp);
-
+					cadastrarPersonagem(iot.proximoId(), nome, xp);
+					
+					lblConfirm.setText("Personagem criado com sucesso!");
+					add(lblConfirm);
+					txtNome.setText("");
+					txtExp.setText("");
+					
 				} catch (InputMismatchException ex) {
 					System.err.println("Invalid Value at Exp");
 					ex.printStackTrace();
 				} catch (IOException ex) {
 					ex.printStackTrace();
+				} catch (NumberFormatException ex) {
+					System.err.println("Campo vazio ou com valor inválido");
+					lblConfirm.setText("Campo vazio ou com valor inválido");
+					lblConfirm.setForeground(Color.RED);
+					add(lblConfirm);
+					repaint();
 				}
 
 				try {
-					lblId.setText(String.format("%d", IOTxt.proximoId()));
+					lblId.setText(String.format("%d", iot.proximoId()));
 				} catch (IOException ex) {
 					ex.printStackTrace();
 				}
-				add(lblConfirm);
-				MouseHandler handler = new MouseHandler();
-				addMouseMotionListener(handler);
-				txtNome.setText("");
-				txtExp.setText("");
 				
 				repaint();
 			}
@@ -129,7 +138,7 @@ public class MenuCadastro extends MenuFrame {
 		repaint();
 	}
 
-	public static void cadastrarPersonagem(int id, String nome, Long xp) throws IOException {
+	public void cadastrarPersonagem(int id, String nome, Long xp) throws IOException {
 		Personagem personagem = new Personagem();
 		personagem.setId(id);
 
@@ -139,7 +148,7 @@ public class MenuCadastro extends MenuFrame {
 		// inserir xp do personagem
 		personagem.setExperience(xp);
 
-		IOTxt.salvarPersonagem(personagem);
+		iot.salvarPersonagem(personagem);
 		// inserir saida de conclusão
 	}
 
@@ -151,6 +160,7 @@ public class MenuCadastro extends MenuFrame {
 		@Override
 		public void mouseMoved(MouseEvent e) {
 			lblConfirm.setText("");
+			lblConfirm.setForeground(Color.BLACK);
 			repaint();
 		}
 	}
