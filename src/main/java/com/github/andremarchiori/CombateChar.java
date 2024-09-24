@@ -1,6 +1,6 @@
 package com.github.andremarchiori;
 
-public class combateChar {
+public class CombateChar {
 	private int id;
 	private String name;
 	private int maxHp;
@@ -8,7 +8,7 @@ public class combateChar {
 	private int exLog = 1;
 	private int type;
 	
-	public combateChar() {}
+	public CombateChar() {}
 	
 	public int getType() {
 		return type;

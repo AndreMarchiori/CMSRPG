@@ -10,6 +10,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.github.andremarchiori.gInterface.MenuExpMod;
+
 public class IOTxt {
 	
 	public IOTxt() {
@@ -38,7 +40,7 @@ public class IOTxt {
 	}
 	
 	public void combateCadastro() {
-		combateChar token = new combateChar();
+		CombateChar token = new CombateChar();
 		try {
 			token.setId(proximoIdCombate());
 		} catch (IOException e) {
@@ -201,7 +203,65 @@ public class IOTxt {
 		this.salvarPersonagem(listaDePersonagens);
 		System.out.println("Adição Completa");
 	}
+	
+	public void callAdd(int exp, int id) {
+		int idPersonagem;
+		ArrayList<Personagem> listaDePersonagens = new ArrayList<>();
 
+			idPersonagem = id;
+			if (!MenuExpMod.personagens.containsKey(idPersonagem)) {
+				System.err.println("Id Inválido. Insira -1 para encerrar ou tente novamente.");
+			}else {
+				MenuExpMod.carregarPersonagens();
+				if (MenuExpMod.personagens.get(idPersonagem).getExLogic() == 0) {
+					System.err.println("Id Inválido.");
+					return;
+				}
+				
+				MenuExpMod.personagens.get(idPersonagem).addExperience(exp);
+				if (listaDePersonagens.isEmpty()) {
+					try {
+						for (int i = 0; i < proximoId() - 1; i++) {
+							listaDePersonagens.add(MenuExpMod.personagens.get(i + 1));
+						}
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+				this.clearTheFile();
+				this.salvarPersonagem(listaDePersonagens);
+			}
+		
+	}
+
+	public void callSub(int exp, int id) {int idPersonagem;
+	ArrayList<Personagem> listaDePersonagens = new ArrayList<>();
+
+	idPersonagem = id;
+	if (!MenuExpMod.personagens.containsKey(idPersonagem)) {
+		System.err.println("Id Inválido. Insira -1 para encerrar ou tente novamente.");
+	}else {
+		MenuExpMod.carregarPersonagens();
+		if (MenuExpMod.personagens.get(idPersonagem).getExLogic() == 0) {
+			System.err.println("Id Inválido.");
+			return;
+		}
+		
+		MenuExpMod.personagens.get(idPersonagem).subExperience(exp);
+		if (listaDePersonagens.isEmpty()) {
+			try {
+				for (int i = 0; i < proximoId() - 1; i++) {
+					listaDePersonagens.add(MenuExpMod.personagens.get(i + 1));
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		this.clearTheFile();
+		this.salvarPersonagem(listaDePersonagens);
+	}
+	}
+	
 	public void callSub(Scanner scanner) {
 		int idPersonagem;
 		ArrayList<Personagem> listaDePersonagens = new ArrayList<>();
@@ -276,7 +336,7 @@ public class IOTxt {
 		}
 	}
 
-	private Personagem parsePersonagem(String linha) {
+	public Personagem parsePersonagem(String linha) {
 		String[] colunas = linha.split(";");
 		Personagem personagem = new Personagem();
 		personagem.setId(Integer.parseInt(colunas[0]));
@@ -341,7 +401,7 @@ public class IOTxt {
 		}
 	}
 	
-	private void salvarPersonagemCombate(combateChar personagem) {
+	private void salvarPersonagemCombate(CombateChar personagem) {
 		try {
 			BufferedWriter bufferedWriter = openWriterCombate();
 			bufferedWriter.write(personagem.toString());

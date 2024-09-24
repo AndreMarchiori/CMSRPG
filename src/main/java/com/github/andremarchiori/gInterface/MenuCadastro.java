@@ -16,7 +16,6 @@ import javax.swing.JTextField;
 import com.github.andremarchiori.IOTxt;
 import com.github.andremarchiori.Personagem;
 
-
 public class MenuCadastro extends MenuFrame {
 	/**
 	 * 
@@ -78,7 +77,7 @@ public class MenuCadastro extends MenuFrame {
 
 		lblConfirm = new JLabel("");
 		lblConfirm.setBounds(150, 330, 200, 45);
-		
+
 		btnCadastro = new JButton("Cadastrar");
 		btnCadastro.setBounds(150, 290, 200, 45);
 		btnCadastro.addActionListener(new ActionListener() {
@@ -91,12 +90,12 @@ public class MenuCadastro extends MenuFrame {
 					String nome = txtNome.getText();
 					long xp = Long.parseLong(txtExp.getText());
 					cadastrarPersonagem(iot.proximoId(), nome, xp);
-					
+
 					lblConfirm.setText("Personagem criado com sucesso!");
 					add(lblConfirm);
 					txtNome.setText("");
 					txtExp.setText("");
-					
+
 				} catch (InputMismatchException ex) {
 					System.err.println("Invalid Value at Exp");
 					ex.printStackTrace();
@@ -115,7 +114,7 @@ public class MenuCadastro extends MenuFrame {
 				} catch (IOException ex) {
 					ex.printStackTrace();
 				}
-				
+
 				repaint();
 			}
 		});
@@ -130,7 +129,7 @@ public class MenuCadastro extends MenuFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TestePainel.main(null);
+				new MenuPersonagens();
 				dispose();
 			}
 		});

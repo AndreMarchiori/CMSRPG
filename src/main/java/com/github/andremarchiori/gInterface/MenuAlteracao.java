@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-public class MenuAlteracao extends MenuFrame{
+public class MenuAlteracao extends MenuFrame {
 	/**
 	 * 
 	 */
@@ -15,7 +15,7 @@ public class MenuAlteracao extends MenuFrame{
 	private JButton btnAtlExp;
 	private JButton btnRemover;
 	private JButton btnRecuperar;
-	
+
 	public MenuAlteracao() {
 		lblMain = new JLabel("Menu de Edição de Persona");
 		lblMain.setBounds(10, 10, 300, 15);
@@ -30,30 +30,38 @@ public class MenuAlteracao extends MenuFrame{
 
 		btnAtlExp = new JButton("Alterar Experiencia");
 		btnAtlExp.setBounds(115, 250, 250, 45);
+		btnAtlExp.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new MenuExpMod();
+				dispose();
+			}
+		});
 		add(btnAtlExp);
-		
+
 		btnRemover = new JButton("Apagar Personagem");
 		btnRemover.setBounds(115, 200, 250, 45);
 		add(btnRemover);
-		
+
 		btnRecuperar = new JButton("Recuperar Personagem");
 		btnRecuperar.setBounds(115, 150, 250, 45);
 		add(btnRecuperar);
-		
+
 		lblMain = new JLabel(
 				"-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
 		lblMain.setBounds(0, 380, 510, 15);
 		add(lblMain);
-		
+
 		btnExit.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TestePainel.main(null);
+				new MenuPersonagens();
 				dispose();
 			}
 		});
-		
+
 		repaint();
 	}
 }

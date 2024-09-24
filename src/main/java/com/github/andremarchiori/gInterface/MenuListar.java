@@ -10,7 +10,7 @@ import javax.swing.JTextArea;
 
 import com.github.andremarchiori.IOTxt;
 
-public class ButtonListar extends MenuFrame{
+public class MenuListar extends MenuFrame{
 	/**
 	 * 
 	 */
@@ -18,7 +18,7 @@ public class ButtonListar extends MenuFrame{
 	private static JTextArea txtLista;
 	private JLabel lblMain;
 	
-	public ButtonListar() {
+	public MenuListar() {
 		lblMain = new JLabel("Listagem de Personas");
 		lblMain.setBounds(10, 10, 300, 15);
 		add(lblMain);
@@ -42,7 +42,7 @@ public class ButtonListar extends MenuFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TestePainel.main(null);
+				new MenuPersonagens();
 				dispose();
 			}
 		});
