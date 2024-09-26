@@ -64,10 +64,6 @@ public class MenuRecuperacao extends MenuFrame{
 				try {
 					int id = Integer.parseInt(txtId.getText());
 					callRecuperacao(id);
-					txtId.setText("");
-					lblConfirmar.setText("Persona recuperada com sucesso!");
-					txtLista.setText("");
-					listarPersonagens(txtLista);
 					repaint();
 				}catch(NumberFormatException ex) {
 					JOptionPane.showMessageDialog(null, "O valor do Id PRECISA ser um número!!!");
@@ -96,14 +92,16 @@ public class MenuRecuperacao extends MenuFrame{
 	
 	public void callRecuperacao(int id) {
 		MenuExpMod.carregarPersonagens();
-		int idPersonagem = id;
 		ArrayList<Personagem> listaDePersonagens = new ArrayList<>();
 		
-		if (!MenuExpMod.personagens.containsKey(idPersonagem)) {
-			JOptionPane.showMessageDialog(null, "Id Não encontrado");
+		if (!MenuExpMod.personagens.containsKey(id)) {
+			JOptionPane.showMessageDialog(null, "Id não encontrado");
+			}else if(MenuExpMod.personagens.get(id).getExLogic() == 1) {
+				JOptionPane.showMessageDialog(null, "Id não encontrado!");
+				return;
 			}
 		
-		MenuExpMod.personagens.get(idPersonagem).setExLogic(1);
+		MenuExpMod.personagens.get(id).setExLogic(1);
 		if (listaDePersonagens.isEmpty()) {
 			try {
 				for (int i = 0; i < iot.proximoId() - 1; i++) {
@@ -116,6 +114,10 @@ public class MenuRecuperacao extends MenuFrame{
 		iot.clearTheFile();
 		iot.salvarPersonagem(listaDePersonagens);
 		System.out.println("Recuperado");
+		txtId.setText("");
+		lblConfirmar.setText("Persona recuperada com sucesso!");
+		txtLista.setText("");
+		listarPersonagens(txtLista);
 	}
 	
 	public static void listarPersonagens(JTextArea txtLista) {

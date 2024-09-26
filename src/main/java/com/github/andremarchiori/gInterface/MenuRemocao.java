@@ -67,10 +67,6 @@ public class MenuRemocao extends MenuFrame{
 				try {
 					int id = Integer.parseInt(txtId.getText());
 					callRemoves(id);
-					txtId.setText("");
-					lblConfirmar.setText("Persona excluida com sucesso!");
-					txtLista.setText("");
-					MenuExpMod.listarPersonagens(txtLista);
 					repaint();
 				}catch(NumberFormatException ex) {
 					JOptionPane.showMessageDialog(null, "O valor do Id PRECISA ser um número!!!");
@@ -99,14 +95,16 @@ public class MenuRemocao extends MenuFrame{
 	
 	public void callRemoves(int id) {
 		MenuExpMod.carregarPersonagens();
-		int idPersonagem = id;
 		ArrayList<Personagem> listaDePersonagens = new ArrayList<>();
 		
-		if (!MenuExpMod.personagens.containsKey(idPersonagem)) {
-			JOptionPane.showMessageDialog(null, "Id Não encontrado");
+		if (!MenuExpMod.personagens.containsKey(id)) {
+			JOptionPane.showMessageDialog(null, "Id não encontrado");
+			}else if(MenuExpMod.personagens.get(id).getExLogic() == 0) {
+				JOptionPane.showMessageDialog(null, "Id não encontrado");
+				return;
 			}
 		
-		MenuExpMod.personagens.get(idPersonagem).setExLogic(0);
+		MenuExpMod.personagens.get(id).setExLogic(0);
 		if (listaDePersonagens.isEmpty()) {
 			try {
 				for (int i = 0; i < iot.proximoId() - 1; i++) {
@@ -119,6 +117,10 @@ public class MenuRemocao extends MenuFrame{
 		iot.clearTheFile();
 		iot.salvarPersonagem(listaDePersonagens);
 		System.out.println("BaNiDo");
+		txtId.setText("");
+		lblConfirmar.setText("Persona excluida com sucesso!");
+		txtLista.setText("");
+		MenuExpMod.listarPersonagens(txtLista);
 	}
 	
 	private class MouseHandler implements MouseMotionListener {

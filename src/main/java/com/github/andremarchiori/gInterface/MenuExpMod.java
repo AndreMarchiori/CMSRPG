@@ -142,7 +142,7 @@ public class MenuExpMod extends MenuFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new MenuPersonagens();
+				new MenuAlteracao();
 				dispose();
 			}
 		});
