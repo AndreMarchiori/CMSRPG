@@ -49,7 +49,7 @@ public class MenuCadastro extends MenuFrame {
 		add(lblMain);
 
 		lblMain = new JLabel("Novo ID: ");
-		lblMain.setBounds(40, 90, 50, 15);
+		lblMain.setBounds(40, 90, 55, 15);
 		add(lblMain);
 
 		lblId = new JLabel();
@@ -58,7 +58,7 @@ public class MenuCadastro extends MenuFrame {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		lblId.setBounds(90, 90, 50, 15);
+		lblId.setBounds(95, 90, 50, 15);
 		add(lblId);
 
 		lblNome = new JLabel("Insira o nome do personagem");

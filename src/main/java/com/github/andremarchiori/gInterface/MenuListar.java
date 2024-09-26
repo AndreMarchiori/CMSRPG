@@ -3,12 +3,11 @@ package com.github.andremarchiori.gInterface;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
-
-import com.github.andremarchiori.IOTxt;
 
 public class MenuListar extends MenuFrame{
 	/**
@@ -68,7 +67,9 @@ public class MenuListar extends MenuFrame{
 			txtLista.append(String.format("%s%n", "-----------------------------------------------------------------------------------------------------------------"));
 			bufferedReader.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			txtLista.append(String.format("Erro na abertura de arquivo, para resolver tente abrir a area de cadastrar%n"));
+			txtLista.append(String.format(" personagens. Se o problema persistir contade o criador do código ou alguém mais %n"));
+			txtLista.append("competente que ele.");
 		}
 	}
 }

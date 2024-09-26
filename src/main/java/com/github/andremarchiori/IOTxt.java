@@ -412,7 +412,7 @@ public class IOTxt {
 		}
 	}
 
-	private void salvarPersonagem(ArrayList<Personagem> listaDePersonagens) {
+	public void salvarPersonagem(ArrayList<Personagem> listaDePersonagens) {
 		try {
 			BufferedWriter bufferedWriter = this.openWriterPersonagens();
 			for (int j = 0; j < listaDePersonagens.size(); j++) {

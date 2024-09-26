@@ -42,10 +42,26 @@ public class MenuAlteracao extends MenuFrame {
 
 		btnRemover = new JButton("Apagar Personagem");
 		btnRemover.setBounds(115, 200, 250, 45);
+		btnRemover.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new MenuRemocao();
+				dispose();
+			}
+		});
 		add(btnRemover);
 
 		btnRecuperar = new JButton("Recuperar Personagem");
 		btnRecuperar.setBounds(115, 150, 250, 45);
+		btnRecuperar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new MenuRecuperacao();
+				dispose();
+			}
+		});
 		add(btnRecuperar);
 
 		lblMain = new JLabel(
